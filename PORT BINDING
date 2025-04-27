@@ -1,0 +1,45 @@
+Microsoft Windows [Version 10.0.22631.5189]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\gurma>docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED        STATUS        PORTS                 NAMES
+dfc007b8115b   mysql     "docker-entrypoint.s…"   25 hours ago   Up 25 hours   3306/tcp, 33060/tcp   mysql-older
+8f620bc7f1ed   mysql     "docker-entrypoint.s…"   25 hours ago   Up 25 hours   3306/tcp, 33060/tcp   nervous_golick
+
+C:\Users\gurma>docker stop
+docker: 'docker stop' requires at least 1 argument
+
+Usage:  docker stop [OPTIONS] CONTAINER [CONTAINER...]
+
+See 'docker stop --help' for more information
+
+C:\Users\gurma>docker stop mysql-older
+mysql-older
+
+C:\Users\gurma>docker rm mysql-older
+mysql-older
+
+C:\Users\gurma>docker stop nervous_golick
+nervous_golick
+
+C:\Users\gurma>docker rm nervous_golick
+nervous_golick
+
+C:\Users\gurma>docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+C:\Users\gurma>docker images
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+mysql        latest    7839322bd6c3   12 days ago   1.17GB
+mysql        8.0       968e12b1fde0   12 days ago   1.06GB
+
+C:\Users\gurma>docker run -d -e MYSQL_ROOT_PASSWORD=secret --name mysql-latest -p8080:3306 mysql
+c56c1cefadb40fa80b05ee7ce950c5014fd8995d26ab4cee654cbc4bdd730693
+
+C:\Users\gurma>docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS                               NAMES
+c56c1cefadb4   mysql     "docker-entrypoint.s…"   12 seconds ago   Up 11 seconds   33060/tcp, 0.0.0.0:8080->3306/tcp   mysql-latest
+
+C:\Users\gurma>docker run -d -e MYSQL_ROOT_PASSWORD=secret --name mysql-older -p8080:3306 mysql
+139ae21e22e2645ad3ebbdfbeada6324416e4f3b8e0863857d8757c841f9d7ce
+docker: Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint mysql-older (3f574fe3918e970e7bce9353bc530a4be4871a9563925735d7dbbc004a8ecd86): Bind for 0.0.0.0:8080 failed: port is already allocated
